@@ -1,0 +1,30 @@
+\section{}\label{question5}
+
+We are concerned with a finite-horizon MDP, where agent is uncertain about the true dynamics of the MDP, and learns the system dynamics through exploration.
+
+\cite{osband} develops posterior sampling for reinforcement learning (PSRL) which expands on the idea of Thompson sampling\cite{thompson}, and provides a bound on expected regret not based on optimism. The paper provides several experiments proving this approach to significantly outperform existing algorithms with similar regret bounds.
+
+Majority of previous algorithms would adopt the OFU (\textit{optimism in the face of uncertainty}) rule. This means that the unknown parameters in the system are assigned maximum statistically possible value. This assumption is arbitrary. The agent is exploring poorly known policies, until it converges to optimal policy.
+
+However, while useful in practice, there is no reason why OFU should be taken for granted. \cite{osband} develops an alternative approach, PSRL, where we optimize over MDP samples, taken at each iteration from the new, updated posterior distribution.
+
+In summary, OFU explores the whole MDP by exploration of poorly understood policies. PSLR maximizes over sample each time, without prioritizing a particular policy. In this, PSLR is less biased in a way than OFU. It turns out that PSLR approach converges faster than OFU.
+
+As a test, \cite{osband} applies PSRL to the River Swim problem, as well as several randomly generated MDPs.
+
+As a further expansion, more testing could be conducted on examples were OFU is commonly used, to verify that PSRL is indeed a better approach. While providing an improved theoretical upper bound on expected regret, more experiments could better establish that this bound is indeed useful in practice (that the algorithm reaches close to the bound).
+
+\begingroup
+\let\clearpage\relax
+
+\begin{thebibliography}{2}
+
+\bibitem{osband}
+Osband I., Russo D., Van Roy B., 
+``(More) efficient reinforcement learning via posterior sampling'', \textit{Advances in Neural Information Processing Systems}, 2013, available at ArXiv: 1306.0940 (accessed 2020-03-28).
+
+\bibitem{thompson}
+Thomson, W.R.,
+``On the likelihood that one unknown probability exceeds another in view of the evidence of two samples'', \textit{Biometrika}, 25(3/4):285-294, 1933
+\end{thebibliography}
+\endgroup

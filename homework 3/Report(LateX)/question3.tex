@@ -1,0 +1,46 @@
+\section{}\label{question3}
+
+Let $\tilde{V}$ be some value function, $V_g$ be the greedy value function and $V^*$ be the optimal value function. Let $\mathbb{S}$ and $\mathbb{A}$ be the state and action spaces, respectively. Let $\epsilon>0$.
+
+For value function $V$ and $s\in \mathbb{S}$ define $L_V(s) = |V(s) - V^*(s)|$ which is the value loss if we choose a sub-optimal policy.
+
+\subparagraph{CLAIM} $|\tilde{V} - V^*|<\epsilon \Rightarrow <\frac{2\epsilon \gamma}{1-\gamma}$.
+
+\subparagraph{PROOF}
+
+Let $\bar{s} = \argmax_{s\in\mathbb{S}} L_{\tilde{V}}(\bar{s})$. This exists by the assumption in CLAIM.
+
+Let $a\mathbb{A}$ be the optimal choice $\pi^*(\bar{s}) = a$ and $b$ be the greedy choice $\pi_g(\bar{s})=b$.
+
+Because $b$ is chosen with greedy policy, it has to be at least as good as $a$:
+\begin{equation}
+\tilde{V}(s) = R(\bar{s},a)+\gamma \sums{a} \tilde{V} (s') \leq R(\bar{s},b) + \sums{b} \tilde{V}(s')
+\label{eq1}
+\end{equation}
+By assumed property, $ V^*(s) - \epsilon< \tilde{V}(s) <V^*(s) + \epsilon, \forall s\in\mathbb{S}$, hence \eqref{eq1} gives
+\begin{equation*}
+R(\bar{s},a)+\gamma \gamma \sums{a} \left(V^* (s')-\epsilon\right) \leq R(\bar{s},b) + \gamma \sums{b} \left(V^*(s')+\epsilon \right)
+\label{eq2}
+\end{equation*}
+
+hence
+\begin{equation}
+R(\bar{s},a)-R(\bar{s},b) \leq 2\gamma \epsilon + \gamma \sum_{s'\in\mathbb{S}}\left( P(s' | \bar{s},b) V^*(s') - P(s' | \bar{s}, a) V^*(s')\right)
+\label{eq3}
+\end{equation}
+
+Because $\bar{s}$ was chosen so that it maximizes $L_V(s)$ for an arbitrary value function $V$, in particular it maximizes the loss for the greedy policy value function $L_{V_g}$, hence, using the fact that $g$ is the greedy policy choice, as well as \eqref{eq3} we have
+\begin{align*}
+L_{V_g}(\bar{s}) = & V^*(\bar{s}) - V_g(\bar{s}) \\
+= & R(\bar{s},a)-R(\bar{s},b) + \gamma \sum_{s'\in\mathbb{S}}\left( P(s' | \bar{s},a) V^*(s') - P(s' | \bar{s}, b) V_g^*(s')\right) \\
+\leq & 2\epsilon \gamma + \gamma \sum_{s'\in\mathbb{S}}\left( P(s' | \bar{s},b) V^*(s') - P(s' | \bar{s},a) V^*(s') + P(s' | \bar{s}, a) V^*(s') - P(s' | \bar{s},b) V_g^*(s')\right)\\
+&= 2\epsilon \gamma + \gamma \sum_{s'\in\mathbb{S}}\left( P(s' | \bar{s},b) V^*(s') - P(s' | \bar{s},b) V_g(s')\right)\\
+&=2\epsilon \gamma + \gamma \sums{b} L_{V_g}(s')\\
+&\leq 2\epsilon\gamma + \gamma \sums{b} L_{V_g}(\bar{s})
+\end{align*}
+rearranging we get that for every $s\in\mathbb{S}$
+\begin{equation*}
+L_{V_g}(s) = \leq L_{V_g}(\bar{s}) \leq \frac{2\epsilon\gamma}{1-\gamma}
+%\label{eq2}
+\end{equation*}
+Q.E.D.

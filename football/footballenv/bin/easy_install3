@@ -1,0 +1,10 @@
+#!/bin/sh
+'''exec' "/Users/fancheng/Library/Mobile Documents/com~apple~CloudDocs/教育/清华大学/04. 课程/学期2（2020春）/2. 深度强化学习/football/footballenv/bin/python" "$0" "$@"
+' '''
+# -*- coding: utf-8 -*-
+import re
+import sys
+from setuptools.command.easy_install import main
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(main())

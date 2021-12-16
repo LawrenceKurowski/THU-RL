@@ -1,0 +1,82 @@
+\documentclass[a4paper,twoside,12pt,fleqn]{scrartcl}
+\usepackage[margin=2.5cm]{geometry}
+%\usepackage{fancyref}
+%\usepackage{graphicx}
+%\usepackage{float}
+%\usepackage{tabularx}
+%\usepackage{booktabs,array}
+%\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools} % for multlined enviornment
+%\usepackage{amsfonts}
+%\usepackage{enumitem}
+\usepackage[hyphens]{url}
+\geometry{a4paper}
+\usepackage{amssymb}%---allows \mathbb{R/Z/etc.} (numbers sets)
+\usepackage{scrextend} %for eddmargin environment
+\usepackage{caption}
+\usepackage{titlesec}
+
+
+%%%%[for python code] %%%%%%
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+%\titlelabel{\thetitle\quad}
+
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\parder}[2]{\frac{\partial{#1}}{\partial{#2}}}
+
+\newcommand{\sectionbreak}{\clearpage}
+
+\newcommand{\lagrangian}[1]{\mathcal{L}(\vec{#1})}
+\newcommand{\vecprod}[2]{\vec{#1}^T{\vec{#2}}}
+\newcommand{\expwx}{\exp(\vecprod{w}{x}_i)}
+\newcommand{\sumn}[2]{\sum_{#1 = 1}^{#2}}
+\newcommand{\sums}[1]{\sum_{s'\in\mathbb{S}} P(s' | \bar{s},#1)}
+
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\usepackage{etoolbox}
+\patchcmd{\thebibliography}{\subsubection*}{}{}{}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\begin{document}
+\title{Reinforcement Learning\\Final Project\\Progress Report}
+\subtitle{Lawrence Kurowski 2019280743 / Jan Henrik 2019}
+\date{30 May 2020}
+\maketitle
+
+\input{section}
+%\input{DDPG}
+%\input{question3}
+
+%\input{AccuracyLoss}
+
+\end{document}

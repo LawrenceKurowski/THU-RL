@@ -1,0 +1,33 @@
+\section{}\label{question2}
+
+\subsection{}
+1st step - no reward.
+Thereafter: each step reward of 1 discounted by $\gamma$.
+Hence 
+\begin{equation*}
+V_{a_1}(s_0) = Q(a_1, s_0) = \sum_{t=0}^\infty r_t\gamma^t = 0 + \sum_{t=1}^\infty \gamma^t = \frac{\gamma}{1-\gamma}
+\end{equation*}
+
+\subsection{}
+1st step - reward of $\frac{\gamma^2}{1-\gamma}$.
+Thereafter: each step reward of 0.
+Hence 
+\begin{equation*}
+V_{a_2}(s_0) = Q(a_2, s_0)= \sum_{t=0}^\infty r_t\gamma^t = \frac{\gamma^2}{1-\gamma} \sum_{t=1}^\infty 0\times \gamma^t = \frac{\gamma^2}{1-\gamma} = \gamma Q(a_1, s_0) < Q(a_1, s_0)
+\end{equation*}
+as $0<\gamma<1$, hence choosing $a_1$ is optimal.
+
+\subsection{}
+Bellman value iteration is $V^{(n)}(s_0) = \max_{i\in{1,2}}Q^n (a_i, s_0)$. At iteration $n$, 
+\begin{align*}
+Q^{(n)}(a_2, s_0) =& \frac{\gamma^2}{1-\gamma} \\
+Q^{(n)}(a_1, s_0) =& 0 + \sum_{t=1}^{n-1} \gamma^t = \frac{\gamma (1-\gamma^n) }{1-\gamma} 
+\end{align*}
+The algorithm will choose $a_1$ for all $k\geq n*$ such that
+\begin{align*}
+Q^{(n*)}(a_2, s_0) \leq & Q^{(n*)}(a_1, s_0) \\
+\frac{\gamma^2}{1-\gamma} \leq & \frac{\gamma (1-\gamma^{n^*}) }{1-\gamma} \\
+\gamma \leq&  1-\gamma^{n^*} \\
+\frac{\log{(1-\gamma)}}{\log{(\gamma)}} \leq & n^*
+\end{align*}
+Q.E.D.

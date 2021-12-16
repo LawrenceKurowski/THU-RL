@@ -1,0 +1,43 @@
+\subsection*{Summary}\label{section_summary}
+
+In this project we examine the implementation augmentations suggested in \cite{engstrom} to the Proximal Policy Optimization algorithm\cite{ppo} applied to train an agent playing the game of football.\cite{football}
+
+As a starting point we select the PPO (proximal policy optimization) model created by OpenAI\cite{ppo}. PPO is a RL model widely used due to its relative simplicity and efficiency compared to other approaches.\cite{ppo} While the PPO framework is widely used, it is also notoriously difficult to train, especially in an environment as complex as Google Football. Engstrom et. al. \cite{engstrom} analyzed how fine-tuning the PPO code can aid making this framework more efficient to train. They tested their approach on a number of tasks, including continuous-space tasks such as humanoid running, as well as discrete-space tasks such as the game of Atari.
+
+In this work, we will consider the considerably more challenging and relatively new environment Google Football, with two teams of 11 players, where the PPO optimizes a single agent (a single player). The environment is difficult to train due to action space size as well as multi-player complexity.
+
+The baseline paper \cite{engstrom} provides examples trained on 3 random seeds which had been previously pointed out to be a potential weak point of this work.\footnote{See the reviewers' comments available at \url{https://openreview.net/forum?id=r1etN1rtPB}} We will thus aim to train the model for 10 seeds on a selection of code augmentations proposed in this paper.  
+
+\subsection*{Environment introduction}\label{section_env}
+We will implement the model on the Google Football environment \cite{football}. The environment contains a number of different gameplay scenarios, such as ``empty goal'', ``3 vs 1 with keeper'' etc. which simulate possible scenarios playing out during a game of football. In this paper we will focus our attention on the ``11 vs 11'' scenario which simulates the entire game.
+
+The state space in this game corresponds to a tuple representing positions on the field of all the players, as well as that f the ball. The ``goal'' results in score +1.
+
+The action space corresponds to agents' movements (``up'', ``right'', ``up-right'', etc.)
+
+\subsection*{Model summary}\label{section_model}
+
+We will base our PPO implementation on OpenAI's PPO2 baseline \cite{ppo2}.
+
+Proximal Policy Optimization replaces second-order optimization with first-order gradient descent-style optimization algorithm by optimizing a surrogate objective function which then defines the bounds for the actual objective. 
+
+The implementation ``trick'' examined in \cite{engstrom} concerns implementation parameter tuning independent of the algorithm itself. The implementation details examined include e.g. reward normalization, Adam annealing and network initialization. The paper also examine the effect of clipping effect (clipping refers to clipping of the probability ratio in the objective expectation that we are optimizing at the heart of the PPO algorithm.)  
+
+
+\begin{thebibliography}{10}
+\bibitem{engstrom}
+Engstrom L., et.al., ``Implementation Matters in Deep Policy Gradients: A Case Study on PPO and TRPO'' (2019) ICLR
+
+\bibitem{ppo}
+Schulman et.al., ``Proximal Policy Optimization Algorithms'' (2017), arXiv:1707.06347
+
+\bibitem{football}
+Kurach et.al., ``Introducing Google Research Football: A Novel Reinforcement Learning Environment'' (2019) Google AI Blog, available at \url{ai.googleblog.com/2019/06/introducing-google-research-football.html} (accessed 2020-5-20)
+
+\bibitem{ppo2}
+PPO2 baseline by OpenAI, repository available at: \url{github.com/openai/baselines/blob/master/baselines/ppo2}
+
+\end{thebibliography}
+
+
+

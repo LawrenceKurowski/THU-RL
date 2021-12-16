@@ -1,0 +1,41 @@
+\section{}\label{question1}
+
+\subsection{}
+Let optimal value function starting from field $s_i$ be denoted by $v_i$, and optimal value at $G$ be $v_G$.
+\begin{equation*}
+ v_G = \sum_{t=0}^\infty \gamma^t = \frac{1}{1-\gamma}
+\end{equation*}
+since $0<\gamma<1$. At each $s_i$, we receive reward=0 at intermediate states, and the only reward comes from the final iterations at $G$. Since at each $s_i$ the optimal policy is to go right, hence
+\begin{equation*}
+v_{n-i} = \sum_{t=0}^{\infty} r_t \gamma^t = \sum_{t=0}^{n-i-1} 0 \times \gamma^{n-i-1} + \sum_{t=n-i}^{\infty} \gamma^t= \frac{\gamma^{n-i}}{1-\gamma}
+\end{equation*}
+for $1\leq i \leq n-1$.
+
+\subsection{}
+Optimal policy does depend on $\gamma$ when $0<\gamma$. If $\gamma = 0$, then $v_G = 1$ and $v_i=0$ otherwise. Going to the right is still an optimal policy, but there are $\infty$ other optimal policies as well (all with optimal value 1).
+
+\subsection{}
+Because we add extra reward $c$ in both directions (for both actions $a_0$ and $a_1$), hence the optimal policy remains unchanged. Let the new optimal value at $s_i$ be denoted by $w_i$, and the original reward function $r_t$, we have
+\begin{equation*}
+w_i = \sum_{t=0}^{\infty} (r_t + c)\gamma^t = \sum_{t=0}^{\infty} \gamma^t r_t + \sum_{t=0}^{\infty} \gamma^t c = v_i + c\sum_{t=0}^{\infty} \gamma^t = v_i + \frac{c}{1-\gamma}
+\end{equation*}
+and 
+\begin{equation*}
+w_G = \sum_{t=0}^{\infty} (1 + c)\gamma^t = v_G + \frac{c}{1-\gamma} = \frac{1+c}{1-\gamma}
+\end{equation*}
+
+\subsection{}
+Let the new optimal value function at $s_i$ be $u_i$, we have
+\begin{equation*}
+u_i = \sum_{t=0}^{\infty} a(r_t + c)\gamma^t = a\sum_{t=0}^{\infty} \gamma^t r_t + a\sum_{t=0}^{\infty} \gamma^t c = av_i + ac\sum_{t=0}^{\infty} \gamma^t = av_i + \frac{ac}{1-\gamma}
+\end{equation*}
+and 
+\begin{equation*}
+u_G = \sum_{t=0}^{\infty} a(1 + c)\gamma^t = av_G + \frac{ac}{1-\gamma} = \frac{a(1+c)}{1-\gamma}
+\end{equation*}
+
+We distinguish 3 cases:
+\subparagraph{$a=0$} for all states, any policy is optimal and has value 0.
+\subparagraph{$a>0$} optimal policy does not change vs. base case (a), and optimal value is given by $u_i$ above.
+\subparagraph{$a<0$} optimal policy is any policy that never gets to $G$ and keeps ``oscillating'' in states $s_1\ldots s_{n-1}$ forever. This is because: suppose there is a policy $\pi$ that is optimal and does end at $G$. Then we can add one more iteration of $a_1$ followed by $a_0$ to get policy $\pi'$. Now $u_{\pi'} \geq \gamma \times u_{\pi} > u_{\pi}$ since all $u$ are negative. This is contradiction with $\pi$ being optimal. Hence, any policy that gets to $G$ is not optimal, or equivalently the optimal policy is to never get to $G$.
+%a policy that does get to $G$ will have the optimal value bounded above by $u_G=\frac{a(1+c)}{1-\gamma}$ Since $a<0$, any other policy will have values that look like $\frac{ac\gamma^{k}}{1-\gamma}$, which are all closer to zero (``less negative''). Hence, the optimal policy is to never hit $G$. 
